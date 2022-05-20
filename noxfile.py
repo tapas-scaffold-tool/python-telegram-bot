@@ -18,12 +18,17 @@ import nox
     "latest",  # Keep it if you want to always test latest version
 ])
 def tests(session, tapas_version):
+    # Fix markupsafe breaking changes see https://github.com/aws/aws-sam-cli/issues/3661
+    session.install("markupsafe==2.0.1")
     if tapas_version == "latest":
         session.install(f"tapas")
     else:
         session.install(f"tapas=={tapas_version}")
     with TemporaryDirectory() as tmp:
         params = {
-            # Fill tapa parameters for test
+            "name": "test_test",
+            "readme": "y",
+            "git": "n",
+            "license": "none",
         }
         session.run("tapas", "dir:.", tmp, "-p", dumps(params))
