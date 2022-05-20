@@ -1,0 +1,8 @@
+croniter
+marshmallow
+marshmallow-dataclass
+marshmallow-enum
+python-dateutil
+python-telegram-bot
+pytz
+PyYAML
